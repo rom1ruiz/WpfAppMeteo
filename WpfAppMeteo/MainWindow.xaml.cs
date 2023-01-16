@@ -227,10 +227,6 @@ namespace WpfAppMeteo
         }
 
 
-        public void clearItems()
-        {
-            ctyText.Items.Clear();
-        }
 
         public string defineHeader(string s)
         {
@@ -307,7 +303,6 @@ namespace WpfAppMeteo
                 city = ctyText.Text;
                 SetFadeIn();
                 SetFadeInForecast();
-                clearItems();
                 getGeoApi();
 
                 e.Handled = true;
@@ -348,7 +343,6 @@ namespace WpfAppMeteo
                 city = ctyText.Text;
                 SetFadeIn();
                 SetFadeInForecast();
-                //clearItems();
                 getGeoApi();
 
                 e.Handled = true;
