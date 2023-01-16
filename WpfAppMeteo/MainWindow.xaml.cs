@@ -106,11 +106,16 @@ namespace WpfAppMeteo
                             //{
                             for (int i = 0; i < geoJson.select.Count; i++)
                             {
-                                ctyText.Items.Add(geoJson.select[i].name + "," + geoJson.select[i].state + "," + geoJson.select[i].country);
+                                if (!ctyText.Items.Contains(geoJson.select[i].name + "," + geoJson.select[i].state + "," + geoJson.select[i].country))
+                                {
+                                    ctyText.Items.Add(geoJson.select[i].name + "," + geoJson.select[i].state + "," + geoJson.select[i].country);
+                                }
                             }
                             //}
                             ctry = ctry.ToLower();
                             getweatherApi(lat, lon);
+                            lbCityName.Content = geoJson.select[0].name;
+
 
                         }
                         else
@@ -180,7 +185,7 @@ namespace WpfAppMeteo
                 string defHeader = defineHeader(weatherMain);
                 headerImg.Source = new BitmapImage(new Uri(startPath + "/weather_status/" + defHeader));
                 string[] splitCit = city.Split(",");
-                lbCityName.Content = splitCit[0];
+
                 //Téléchargement du JSON depuis l'API Weather pour prévision 4 jours
                 string forecastQuery = forecastApi + "lat=" + lat + "&lon=" + lon + "&lang=fr&units=metric&appid=" + ApiKey;
                 string jsonForecast = wc.DownloadString(forecastQuery);
@@ -208,15 +213,23 @@ namespace WpfAppMeteo
                 string mainJ2 = FrcJson.list[15].weather[0].main;
                 string mainJ3 = FrcJson.list[23].weather[0].main;
                 string mainJ4 = FrcJson.list[31].weather[0].main;
+                //Détermination du nom de l'image appropriée
                 string defJ1 = defineWeather(mainJ1);
                 string defJ2 = defineWeather(mainJ2);
                 string defJ3 = defineWeather(mainJ3);
                 string defJ4 = defineWeather(mainJ4);
+                //Définition de l'image
                 weatherJ1.Source = new BitmapImage(new Uri(startPath + "/weather_status/" + defJ1));
                 weatherJ2.Source = new BitmapImage(new Uri(startPath + "/weather_status/" + defJ2));
                 weatherJ3.Source = new BitmapImage(new Uri(startPath + "/weather_status/" + defJ3));
                 weatherJ4.Source = new BitmapImage(new Uri(startPath + "/weather_status/" + defJ4));
             }
+        }
+
+
+        public void clearItems()
+        {
+            ctyText.Items.Clear();
         }
 
         public string defineHeader(string s)
@@ -294,6 +307,7 @@ namespace WpfAppMeteo
                 city = ctyText.Text;
                 SetFadeIn();
                 SetFadeInForecast();
+                clearItems();
                 getGeoApi();
 
                 e.Handled = true;
@@ -334,6 +348,7 @@ namespace WpfAppMeteo
                 city = ctyText.Text;
                 SetFadeIn();
                 SetFadeInForecast();
+                //clearItems();
                 getGeoApi();
 
                 e.Handled = true;

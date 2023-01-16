@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesignMahApps="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="WpfAppMeteo.MainWindow"
         mc:Ignorable="d"
-        Opacity="0"
+        Opacity="1"
         Title="Weather" Height="450" Width="800" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/app.ico">
     <Window.Triggers>
         <EventTrigger RoutedEvent="FrameworkElement.Loaded">
