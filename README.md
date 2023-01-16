@@ -8,7 +8,7 @@ WPF Weather App
 - It's based on OpenWeatherAPI
 - It got some really cool animations 
 
-
+![Image](https://i.imgur.com/nPnHKsI.png)
 
 ## 🙇 Author
 #### Romain Ruiz
